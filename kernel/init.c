@@ -795,6 +795,7 @@ FUNC_NORETURN void z_cstart(void)
 	switch_to_main_thread(prepare_multithreading());
 #else
 #ifdef ARCH_SWITCH_TO_MAIN_NO_MULTITHREADING
+// #if 0
 	/* Custom ARCH-specific routine to switch to main()
 	 * in the case of no multi-threading.
 	 */

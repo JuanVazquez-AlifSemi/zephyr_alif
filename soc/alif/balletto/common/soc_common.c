@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#include <se_service.h>
+// #include <se_service.h>
 #include <soc_common.h>
 #include <zephyr/init.h>
 #include <zephyr/arch/cpu.h>
@@ -16,6 +16,7 @@ LOG_MODULE_REGISTER(soc, CONFIG_SOC_LOG_LEVEL);
 #include <zephyr/pm/pm.h>
 #include <zephyr/dt-bindings/dma/alif_dma_event_router.h>
 
+// #if 0
 /*
  * Lock deeper power states during early boot to prevent premature sleep
  *
@@ -51,6 +52,7 @@ static int soc_pm_unlock_boot_states(void)
 	return 0;
 }
 SYS_INIT(soc_pm_unlock_boot_states, APPLICATION, 0);
+// #endif
 
 /*
  * Single SoC PM notifier for save/restore of SoC-level peripheral
@@ -243,10 +245,10 @@ void sys_arch_reboot(int type)
 	case SYS_REBOOT_WARM:
 		/* Use Cold boot until NVIC reset is fully working */
 		/* se_service_boot_reset_cpu(EXTSYS_1); */
-		se_service_boot_reset_soc();
+		se_service_boot_reset_soc(); //implicit
 		break;
 	case SYS_REBOOT_COLD:
-		se_service_boot_reset_soc();
+		se_service_boot_reset_soc(); //implicit
 		break;
 
 	default:

@@ -45,6 +45,13 @@ struct clock_control_alif_config {
 #define PLL_CLOCK1_SRC_FREQ     DT_PROP(DT_PATH(clocks, pll_clk1), clock_frequency)
 #define PLL_CLOCK2_SRC_FREQ     DT_PROP(DT_PATH(clocks, pll_clk2), clock_frequency)
 
+// #if 1 //todo fpga
+// #define OSC_CLOCK_SRC_FREQ(clk) CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC
+// #define PLL_CLOCK1_SRC_FREQ     CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC
+// #define PLL_CLOCK2_SRC_FREQ     CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC
+// #endif //fpga
+
+
 /* CLK_ENA register config */
 #define ALIF_CLK_ENA_CLK38P4M_BIT 23U
 #define ALIF_CLK_ENA_CLK20M_BIT   22U
@@ -52,12 +59,26 @@ struct clock_control_alif_config {
 #define ALIF_CLK_ENA_CLK160M_BIT  20U
 
 #define ALIF_CLOCK_SYST_CORE_FREQ     CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC
+
+
 #define ALIF_CLOCK_HFOSC_CLK_FREQ     OSC_CLOCK_SRC_FREQ(hfxo)
 #define ALIF_CLOCK_HFRC_CLK_FREQ      OSC_CLOCK_SRC_FREQ(hfrc)
 #define ALIF_CLOCK_76M8_CLK_FREQ      (ALIF_CLOCK_HFOSC_CLK_FREQ * 2U)
 #define ALIF_CLOCK_128K_CLK_FREQ      (OSC_CLOCK_SRC_FREQ(lfrc) * 4U)
 #define ALIF_CLOCK_S32K_CLK_FREQ      OSC_CLOCK_SRC_FREQ(lfxo)
 #define ALIF_CLOCK_AUDIO_PLL_CLK_FREQ ALIF_CLOCK_HFOSC_CLK_FREQ
+
+
+// #if 1 //todo fpga
+
+// #define ALIF_CLOCK_HFOSC_CLK_FREQ     CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC
+// #define ALIF_CLOCK_HFRC_CLK_FREQ      CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC
+// #define ALIF_CLOCK_76M8_CLK_FREQ      CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC
+// #define ALIF_CLOCK_128K_CLK_FREQ      CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC
+// #define ALIF_CLOCK_S32K_CLK_FREQ      CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC
+// #define ALIF_CLOCK_AUDIO_PLL_CLK_FREQ CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC
+
+// #endif //todo fpga
 
 /** register offset (from clkid cell) */
 #define ALIF_CLOCK_CFG_REG(id) (((id) >> ALIF_CLOCK_REG_SHIFT) & ALIF_CLOCK_REG_MASK)
@@ -154,7 +175,7 @@ uint32_t get_syst_hclk_freq(void)
 	return (get_syspll_clk_freq() >> divider);
 }
 
-static uint32_t get_syst_pclk_freq(void)
+static uint32_t get_syst_pclk_freq(void) //implicit
 {
 	uint32_t divider = (sys_read32(AON_BUS_CLK_DIV)) & 0x3;
 
@@ -289,7 +310,8 @@ static uint32_t alif_get_input_clock(uint32_t const clock_name)
 	case ALIF_UART5_SYST_PCLK:
 	case ALIF_I2C0_GATED_CLK:
 	case ALIF_I2C1_GATED_CLK:
-		return get_syst_pclk_freq();
+		//return get_syst_pclk_freq(); //todo
+		return CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC; //todo //fpga
 	case ALIF_UART0_38M4_CLK:
 	case ALIF_UART1_38M4_CLK:
 	case ALIF_UART2_38M4_CLK:

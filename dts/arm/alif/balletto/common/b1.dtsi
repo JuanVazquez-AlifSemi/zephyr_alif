@@ -287,7 +287,7 @@
 		power-domains = <&pd_syst>;
 		reg-shift = <2>;
 		current-speed = <115200>;
-		dlf = <11>;
+		dlf = <11>; //todo
 		pinctrl-0 = <&pinctrl_uart4>;
 		pinctrl-1 = <&pinctrl_uart4_sleep>;
 		pinctrl-names = "default", "sleep";
@@ -790,7 +790,7 @@
 
 		alif_hci_uart: alif_hci_uart {
 			compatible = "alif,bt-hci-uart";
-			status = "okay";
+			status = "okay"; //
 		};
 	};
 
@@ -1152,7 +1152,7 @@
 	cdc200: cdc200@49031000 {
 		compatible = "tes,cdc-2.1";
 		reg = <0x49031000 0x1000>;
-		status = "okay";
+		status = "okay"; //
 		interrupts =	<333 0>,
 				<334 0>,
 				<335 0>,
@@ -1237,7 +1237,7 @@
 
 		ref-frequency = <38400000>;
 		cfg-clk-frequency = <25000000>;
-		status = "okay";
+		status = "okay"; //
 	};
 
 	mipi_dsi: mipi-dsi@49032000 {
@@ -1465,7 +1465,7 @@
 		compatible = "alif,secure-enclave-services";
 		mhuv2-send-node = <&seservice0s>;
 		mhuv2-recv-node = <&seservice0r>;
-		status = "okay";
+		status = "okay"; //
 	};
 
 	ieee802154: ieee802154 {
@@ -1474,7 +1474,7 @@
 	};
 
 	rng: rng {
-		status = "okay";
+		status = "okay"; //
 		compatible = "alif,secure-enclave-trng";
 	};
 

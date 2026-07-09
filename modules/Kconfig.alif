@@ -11,7 +11,7 @@ config ZEPHYR_HAL_ALIF_MODULE
 
 config HAS_ALIF_SE_SERVICES
 	bool "Alif HAL drivers support"
-	depends on SOC_FAMILY_ENSEMBLE || SOC_FAMILY_BALLETTO
+	depends on SOC_FAMILY_ENSEMBLE || SOC_FAMILY_BALLETTO ##todo
 
 config IEEE802154_ALIF_SUPPORT
 	bool "include 802.15.4 support"

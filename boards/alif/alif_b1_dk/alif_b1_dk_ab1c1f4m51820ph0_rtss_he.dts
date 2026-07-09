@@ -23,8 +23,8 @@
 
 &{/} {
 	chosen {
-		zephyr,console = &uart2;
-		zephyr,shell-uart = &uart2;
+		zephyr,console = &uart3; //todo //uart2 //uart4
+		zephyr,shell-uart = &uart3; //todo fpga
 		zephyr,bt-hci = &alif_hci_uart;
 		zephyr,hci-uart = &uart_hci;
 		zephyr,uart-mcumgr = &uart2;
@@ -56,7 +56,11 @@
 	};
 };
 
-&uart2 {
+//&uart2 {
+//	status = "okay";
+//};
+
+&uart3 { //todo
 	status = "okay";
 };
 
@@ -64,6 +68,7 @@
 	status = "okay";
 };
 
+#if 0
 &uart_hci {
 	/*
 	 * Cell 0: ALIF_DMA_ENCODE(channel, dma_group, handshake)
@@ -93,6 +98,7 @@
 	dma-names = "rx", "tx";
 	status = "okay";
 };
+#endif
 
 &dma2 {
 	status = "okay";

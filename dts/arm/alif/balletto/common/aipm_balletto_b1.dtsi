@@ -15,7 +15,7 @@
 / {
 	aipm_run: aipm-run {
 		compatible = "alif,aipm-run";
-		status = "okay";
+		status = "okay";//
 
 		aipm_run_default: run-profile-default {
 			aipm-power-domains = <(ALIF_PD_SSE700_AON_MASK | ALIF_PD_SYST_MASK |
